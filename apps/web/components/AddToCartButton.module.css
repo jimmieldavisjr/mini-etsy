@@ -1,0 +1,22 @@
+.wrap {
+  display: grid;
+  gap: 8px;
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+}
+
+.qty {
+  width: 88px;
+  flex: none;
+}
+
+.button {
+  flex: 1;
+}
+
+.message {
+  margin: 0;
+}

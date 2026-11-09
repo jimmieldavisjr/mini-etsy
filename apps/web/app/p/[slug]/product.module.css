@@ -1,0 +1,54 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+}
+
+.info {
+  display: grid;
+  gap: 8px;
+}
+
+.info h1 {
+  margin: 0;
+}
+
+.shop {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.price {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.stock {
+  margin: 0 0 8px;
+  color: var(--muted);
+}
+
+.descHeading {
+  font-size: 1.1rem;
+  margin: 24px 0 0;
+}
+
+.description {
+  margin: 0;
+  white-space: pre-line;
+}
+
+.skeleton {
+  composes: skeleton from '../../../components/ui.module.css';
+  height: 420px;
+}
+
+@media (max-width: 760px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}

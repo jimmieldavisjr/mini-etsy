@@ -1,0 +1,19 @@
+node_modules/
+dist/
+.next/
+out/
+coverage/
+*.db
+*.db-journal
+.env
+.env.local
+*.tsbuildinfo
+next-env.d.ts
+apps/api/src/generated/
+# personal planning notes, not part of the project
+reference/
+
+# local editor and agent tooling, kept out of the repo
+.claude/
+AGENTS.md
+CLAUDE.md

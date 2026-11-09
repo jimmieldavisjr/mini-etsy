@@ -1,0 +1,52 @@
+.hero {
+  padding: 24px 0 8px;
+  text-align: center;
+}
+
+.hero h1 {
+  max-width: 22ch;
+  margin-inline: auto;
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2px;
+  min-height: 110px;
+  padding: 16px;
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+  border: 1px solid #f3d6c4;
+  text-decoration: none;
+  transition: background 150ms ease;
+}
+
+.tile:hover {
+  background: #f8dccb;
+}
+
+.tileName {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.tileCount {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.tilesSkeleton {
+  composes: skeleton from '../components/ui.module.css';
+  height: 110px;
+}

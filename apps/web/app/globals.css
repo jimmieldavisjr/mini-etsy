@@ -1,0 +1,78 @@
+:root {
+  --bg: #fbf8f4;
+  --surface: #ffffff;
+  --text: #2a2622;
+  --muted: #6f665d;
+  --border: #e7dfd5;
+  --accent: #c2541b;
+  --accent-strong: #9e4214;
+  --accent-soft: #fbe9de;
+  --success: #2f7a4b;
+  --danger: #b3261e;
+  --radius: 10px;
+  --shadow: 0 1px 2px rgb(42 38 34 / 6%), 0 4px 14px rgb(42 38 34 / 6%);
+  --font: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --font-display: ui-serif, Georgia, Cambria, 'Times New Roman', serif;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 0.5em;
+  /* Georgia's old-style figures make ids like "D00A" hard to read. */
+  font-variant-numeric: lining-nums;
+}
+
+h1 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

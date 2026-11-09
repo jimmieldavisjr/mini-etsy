@@ -1,0 +1,94 @@
+// Mini-Etsy database schema.
+//
+// Each backend module owns its own tables. There are no foreign keys between
+// modules: Cart and Ordering refer to products by id only, and Ordering keeps
+// its own snapshot of product title and price.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// ---------- Catalog module ----------
+
+model Category {
+  id       String    @id @default(cuid())
+  name     String
+  slug     String    @unique
+  products Product[]
+
+  @@map("catalog_categories")
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String
+  priceCents  Int
+  stock       Int
+  shopName    String
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id])
+
+  @@index([categoryId])
+  @@index([createdAt])
+  @@map("catalog_products")
+}
+
+// ---------- Cart module ----------
+
+model Cart {
+  id        String     @id
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  items     CartItem[]
+
+  @@map("cart_carts")
+}
+
+model CartItem {
+  cartId    String
+  productId String
+  quantity  Int
+  addedAt   DateTime @default(now())
+  cart      Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+
+  @@id([cartId, productId])
+  @@map("cart_items")
+}
+
+// ---------- Ordering module ----------
+
+model Order {
+  id              String      @id
+  status          String
+  totalCents      Int
+  email           String
+  shippingName    String
+  shippingAddress String
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  lines           OrderLine[]
+
+  @@map("ordering_orders")
+}
+
+model OrderLine {
+  id             Int    @id @default(autoincrement())
+  orderId        String
+  productId      String
+  titleSnapshot  String
+  unitPriceCents Int
+  quantity       Int
+  order          Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+  @@map("ordering_order_lines")
+}

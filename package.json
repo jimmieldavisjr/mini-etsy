@@ -1,0 +1,25 @@
+{
+  "name": "mini-etsy",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A small Etsy-style storefront built as a NestJS + Next.js modular monolith.",
+  "license": "MIT",
+  "author": "Jimmie Davis",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c blue,magenta \"npm run start:dev -w @mini-etsy/api\" \"npm run dev -w @mini-etsy/web\"",
+    "build": "npm run build -w @mini-etsy/api && npm run build -w @mini-etsy/web",
+    "seed": "npm run db:setup -w @mini-etsy/api",
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "devDependencies": {
+    "concurrently": "10.0.7"
+  }
+}
