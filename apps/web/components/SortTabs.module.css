@@ -1,0 +1,36 @@
+.bar {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 3px;
+  border-radius: var(--r-md);
+  background: rgb(28 27 26 / 4%);
+  border: 1px solid var(--stroke);
+}
+
+.option {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-2);
+  text-decoration: none;
+  transition:
+    background var(--fast) var(--ease),
+    color var(--fast) var(--ease);
+}
+
+.option:hover {
+  color: var(--text);
+  background: rgb(255 255 255 / 55%);
+}
+
+.option[aria-current='true'] {
+  color: var(--text);
+  font-weight: 600;
+  background: var(--layer-solid);
+  box-shadow: var(--e2);
+}

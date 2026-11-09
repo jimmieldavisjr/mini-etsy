@@ -1,35 +1,61 @@
+.skipLink {
+  position: absolute;
+  left: 16px;
+  top: -48px;
+  z-index: 100;
+  padding: 8px 14px;
+  border-radius: var(--r-md);
+  background: var(--accent);
+  color: var(--text-on-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skipLink:focus {
+  top: 12px;
+}
+
+.announcement {
+  padding: 8px 16px;
+  text-align: center;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: rgb(251 250 247 / 85%);
+  background: var(--accent);
+}
+
+/* Acrylic title bar: translucent, blurred, with a hairline edge. */
 .header {
   position: sticky;
   top: 0;
-  z-index: 10;
-  background: rgb(255 255 255 / 92%);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--border);
+  z-index: 50;
+  background: rgb(248 246 242 / 72%);
+  backdrop-filter: blur(30px) saturate(160%);
+  border-bottom: 1px solid var(--stroke);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 60%) inset;
 }
 
-.headerInner {
+.headerTop {
   display: flex;
   align-items: center;
-  gap: 16px;
-  min-height: 64px;
+  gap: 24px;
+  min-height: 72px;
 }
 
-.logo {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--accent);
-  text-decoration: none;
-  white-space: nowrap;
+.navPlaceholder {
+  height: 44px;
 }
 
-.logo span {
-  color: var(--text);
-}
+@media (max-width: 760px) {
+  .headerTop {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    min-height: 0;
+  }
 
-.footer {
-  border-top: 1px solid var(--border);
-  padding: 24px 0;
-  color: var(--muted);
-  font-size: 0.9rem;
+  .announcement {
+    font-size: 0.72rem;
+  }
 }

@@ -10,8 +10,8 @@ const shipping = {
 };
 
 const lines = [
-  { productId: 'p1', titleSnapshot: 'Mug', unitPriceCents: 1800, quantity: 2 },
-  { productId: 'p2', titleSnapshot: 'Card', unitPriceCents: 450, quantity: 3 },
+  { productId: 'p1', titleSnapshot: 'Mug', imageSnapshot: null, unitPriceCents: 1800, quantity: 2 },
+  { productId: 'p2', titleSnapshot: 'Card', imageSnapshot: null, unitPriceCents: 450, quantity: 3 },
 ];
 
 function orderIn(status: OrderStatus): Order {

@@ -4,6 +4,7 @@ export interface CartProductInfo {
   slug: string;
   title: string;
   shopName: string;
+  imageUrl: string | null;
   priceCents: number;
   stock: number;
   active: boolean;

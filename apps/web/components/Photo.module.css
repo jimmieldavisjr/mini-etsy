@@ -1,0 +1,26 @@
+.frame {
+  position: relative;
+  overflow: hidden;
+  background: rgb(28 27 26 / 5%);
+  isolation: isolate;
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 600ms var(--ease);
+}
+
+.zoom:hover .image,
+:global(a:hover) > .zoom .image,
+:global(a:focus-visible) > .zoom .image {
+  transform: scale(1.045);
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--text-3);
+  background: linear-gradient(135deg, rgb(28 27 26 / 4%), rgb(28 27 26 / 9%));
+}

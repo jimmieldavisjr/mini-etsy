@@ -12,6 +12,8 @@ export interface CategoryDto {
   name: string;
   slug: string;
   productCount: number;
+  /** Base URL of the category photo, or null. */
+  imageUrl: string | null;
 }
 
 export interface ProductSummaryDto {
@@ -22,11 +24,15 @@ export interface ProductSummaryDto {
   stock: number;
   shopName: string;
   categorySlug: string;
+  /** Base URL of the product photo, or null. */
+  imageUrl: string | null;
 }
 
 export interface ProductDetailDto extends ProductSummaryDto {
   description: string;
   categoryName: string;
+  /** Page on Unsplash that credits the photographer, or null. */
+  imageSourceUrl: string | null;
 }
 
 export type ProductSort = 'new' | 'price_asc' | 'price_desc';
@@ -45,6 +51,7 @@ export interface CartLineDto {
   slug: string;
   title: string;
   shopName: string;
+  imageUrl: string | null;
   unitPriceCents: number;
   quantity: number;
   lineTotalCents: number;
@@ -88,6 +95,7 @@ export interface CheckoutRequest {
 export interface OrderLineDto {
   productId: string;
   title: string;
+  imageUrl: string | null;
   unitPriceCents: number;
   quantity: number;
   lineTotalCents: number;

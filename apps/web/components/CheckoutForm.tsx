@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useState, type FormEvent } from 'react';
 import type { CheckoutRequest } from '@mini-etsy/shared';
 import { announceCartChange, api } from '@/lib/api';
+import { ErrorCircleIcon, LockIcon } from './icons';
 import ui from './ui.module.css';
 import styles from './CheckoutForm.module.css';
 
@@ -69,6 +70,7 @@ export function CheckoutForm() {
   const fieldError = (field: keyof CheckoutRequest) =>
     errors[field] && (
       <p id={`${field}-error`} className={ui.fieldError}>
+        <ErrorCircleIcon size={14} />
         {errors[field]}
       </p>
     );
@@ -76,48 +78,66 @@ export function CheckoutForm() {
   return (
     <form className={styles.form} onSubmit={onSubmit} noValidate>
       {serverError && (
-        <p className={ui.error} role="alert">
+        <p className={ui.infoError} role="alert">
+          <ErrorCircleIcon size={18} />
           {serverError}
         </p>
       )}
 
-      <div className={ui.field}>
-        <label htmlFor="email" className={ui.label}>Email</label>
-        <input
-          {...fieldProps('email')}
-          type="email"
-          autoComplete="email"
-          onChange={(e) => update('email', e.target.value)}
-        />
-        {fieldError('email')}
-      </div>
+      <fieldset className={styles.section}>
+        <legend className={styles.legend}>
+          <span className={styles.step}>1</span> Contact
+        </legend>
+        <div className={ui.field}>
+          <label htmlFor="email" className={ui.label}>Email</label>
+          <input
+            {...fieldProps('email')}
+            type="email"
+            autoComplete="email"
+            placeholder="you@example.com"
+            onChange={(e) => update('email', e.target.value)}
+          />
+          {fieldError('email')}
+        </div>
+      </fieldset>
 
-      <div className={ui.field}>
-        <label htmlFor="shippingName" className={ui.label}>Full name</label>
-        <input
-          {...fieldProps('shippingName')}
-          autoComplete="name"
-          onChange={(e) => update('shippingName', e.target.value)}
-        />
-        {fieldError('shippingName')}
-      </div>
+      <fieldset className={styles.section}>
+        <legend className={styles.legend}>
+          <span className={styles.step}>2</span> Delivery
+        </legend>
+        <div className={ui.field}>
+          <label htmlFor="shippingName" className={ui.label}>Full name</label>
+          <input
+            {...fieldProps('shippingName')}
+            autoComplete="name"
+            onChange={(e) => update('shippingName', e.target.value)}
+          />
+          {fieldError('shippingName')}
+        </div>
+        <div className={ui.field}>
+          <label htmlFor="shippingAddress" className={ui.label}>Shipping address</label>
+          <textarea
+            {...fieldProps('shippingAddress')}
+            rows={4}
+            autoComplete="street-address"
+            placeholder={'Street and number\nCity, postal code\nCountry'}
+            onChange={(e) => update('shippingAddress', e.target.value)}
+          />
+          {fieldError('shippingAddress')}
+        </div>
+      </fieldset>
 
-      <div className={ui.field}>
-        <label htmlFor="shippingAddress" className={ui.label}>Shipping address</label>
-        <textarea
-          {...fieldProps('shippingAddress')}
-          rows={4}
-          autoComplete="street-address"
-          onChange={(e) => update('shippingAddress', e.target.value)}
-        />
-        {fieldError('shippingAddress')}
-      </div>
-
-      <p className={ui.muted}>This is a demo. No payment is taken and nothing ships.</p>
-
-      <button type="submit" className={ui.button} disabled={submitting}>
+      <button
+        type="submit"
+        className={`${ui.buttonAccent} ${ui.large} ${ui.block}`}
+        disabled={submitting}
+      >
+        <LockIcon size={16} />
         {submitting ? 'Placing order…' : 'Place order'}
       </button>
+      <p className={`${ui.small} ${styles.note}`}>
+        This is a demo. No payment is taken and nothing ships.
+      </p>
     </form>
   );
 }

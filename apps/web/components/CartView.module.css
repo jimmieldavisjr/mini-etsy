@@ -1,8 +1,53 @@
-.actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex-wrap: wrap;
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 32px;
+  align-items: start;
+}
+
+.lines {
+  display: grid;
+  gap: 16px;
+  justify-items: start;
+}
+
+.lines > ul {
+  width: 100%;
+}
+
+.empty {
+  display: grid;
   gap: 12px;
-  margin-top: 20px;
+  justify-items: center;
+  padding: 64px 24px;
+  text-align: center;
+}
+
+.emptyIcon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 4px;
+  border-radius: 50%;
+  color: var(--accent-text);
+  background: var(--accent-soft);
+}
+
+.skeletonLines {
+  composes: skeleton from './ui.module.css';
+  height: 360px;
+  border-radius: var(--r-xl);
+}
+
+.skeletonSummary {
+  composes: skeleton from './ui.module.css';
+  height: 300px;
+  border-radius: var(--r-xl);
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
 }

@@ -4,7 +4,9 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import type { CartDto } from '@mini-etsy/shared';
 import { announceCartChange, api } from '@/lib/api';
+import { CartSummary } from './CartSummary';
 import { CartTable } from './CartTable';
+import { ArrowRightIcon, BagIcon, ErrorCircleIcon } from './icons';
 import ui from './ui.module.css';
 import styles from './CartView.module.css';
 
@@ -37,18 +39,28 @@ export function CartView() {
 
   if (!cart) {
     return error ? (
-      <p className={ui.error} role="alert">{error}</p>
+      <p className={ui.infoError} role="alert">
+        <ErrorCircleIcon size={18} />
+        {error}
+      </p>
     ) : (
-      <p className={ui.muted}>Loading your cart…</p>
+      <div className={styles.layout} aria-busy="true">
+        <div className={styles.skeletonLines} />
+        <div className={styles.skeletonSummary} />
+      </div>
     );
   }
 
   if (cart.lines.length === 0) {
     return (
-      <div className={ui.card}>
-        <p>Your cart is empty.</p>
-        <Link href="/" className={ui.button}>
-          Discover something handmade
+      <div className={`${ui.cardPadded} ${styles.empty}`}>
+        <span className={styles.emptyIcon}>
+          <BagIcon size={28} />
+        </span>
+        <h2>Your cart is empty</h2>
+        <p className={ui.muted}>Find something made by hand to fill it.</p>
+        <Link href="/" className={`${ui.buttonAccent} ${ui.large}`}>
+          Start browsing
         </Link>
       </div>
     );
@@ -57,32 +69,37 @@ export function CartView() {
   const blocked = cart.lines.some((l) => !l.available || l.quantity > l.stock);
 
   return (
-    <>
-      {error && (
-        <p className={ui.error} role="alert">
-          {error}
-        </p>
-      )}
-      <CartTable
-        lines={cart.lines}
-        busy={busy}
-        onQuantityChange={(productId, quantity) =>
-          save(() => api.updateCartItem(productId, { quantity }))
-        }
-        onRemove={(productId) => save(() => api.removeCartItem(productId))}
-      />
-      <div className={styles.actions}>
-        <Link href="/" className={ui.buttonGhost}>
-          Keep shopping
+    <div className={styles.layout}>
+      <div className={styles.lines}>
+        {error && (
+          <p className={ui.infoError} role="alert">
+            <ErrorCircleIcon size={18} />
+            {error}
+          </p>
+        )}
+        <CartTable
+          lines={cart.lines}
+          busy={busy}
+          onQuantityChange={(productId, quantity) =>
+            save(() => api.updateCartItem(productId, { quantity }))
+          }
+          onRemove={(productId) => save(() => api.removeCartItem(productId))}
+        />
+        <Link href="/" className={ui.textLink}>
+          ← Keep shopping
         </Link>
+      </div>
+      <CartSummary lines={cart.lines}>
         {blocked ? (
-          <span className={ui.muted}>Fix the items above to check out.</span>
+          <p className={ui.fieldError}>
+            <ErrorCircleIcon size={14} /> Update the items marked above to check out.
+          </p>
         ) : (
-          <Link href="/checkout" className={ui.button}>
-            Proceed to checkout
+          <Link href="/checkout" className={`${ui.buttonAccent} ${ui.large} ${ui.block}`}>
+            Proceed to checkout <ArrowRightIcon size={16} />
           </Link>
         )}
-      </div>
-    </>
+      </CartSummary>
+    </div>
   );
 }

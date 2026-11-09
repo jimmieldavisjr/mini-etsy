@@ -1,6 +1,6 @@
 .wrap {
   display: grid;
-  gap: 8px;
+  gap: 10px;
 }
 
 .row {
@@ -8,15 +8,11 @@
   gap: 12px;
 }
 
-.qty {
-  width: 88px;
-  flex: none;
-}
-
 .button {
   flex: 1;
 }
 
 .message {
-  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-2);
 }

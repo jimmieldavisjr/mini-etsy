@@ -13,6 +13,8 @@ export interface ProductProps {
   shopName: string;
   active: boolean;
   createdAt: Date;
+  imageUrl: string | null;
+  imageSourceUrl: string | null;
   category: { id: string; slug: string; name: string };
 }
 
@@ -28,6 +30,8 @@ export class Product extends Entity {
     readonly shopName: string,
     readonly active: boolean,
     readonly createdAt: Date,
+    readonly imageUrl: string | null,
+    readonly imageSourceUrl: string | null,
     readonly category: { id: string; slug: string; name: string },
   ) {
     super(id);
@@ -49,6 +53,8 @@ export class Product extends Entity {
       props.shopName,
       props.active,
       props.createdAt,
+      props.imageUrl,
+      props.imageSourceUrl,
       props.category,
     );
   }

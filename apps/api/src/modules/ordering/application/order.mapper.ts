@@ -13,6 +13,7 @@ export function toOrderDto(order: Order): OrderDto {
     lines: order.lines.map((line) => ({
       productId: line.productId,
       title: line.titleSnapshot,
+      imageUrl: line.imageSnapshot,
       unitPriceCents: line.unitPrice.cents,
       quantity: line.quantity.value,
       lineTotalCents: line.lineTotal.cents,

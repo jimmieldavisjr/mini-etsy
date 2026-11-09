@@ -40,6 +40,19 @@ describe('Catalog (e2e)', () => {
     expect(products.every((p) => p.categorySlug === 'jewelry')).toBe(true);
   });
 
+  it('gives every seeded product and category a photo', async () => {
+    const products = (await request(app.getHttpServer()).get('/products?limit=100').expect(200))
+      .body as ProductSummaryDto[];
+    const categories = (await request(app.getHttpServer()).get('/categories').expect(200))
+      .body as CategoryDto[];
+    const urls = [...products, ...categories].map((x) => x.imageUrl);
+    expect(urls.every((u) => u?.startsWith('https://images.unsplash.com/photo-'))).toBe(true);
+
+    const detail = (await request(app.getHttpServer()).get(`/products/${products[0].slug}`).expect(200))
+      .body as ProductDetailDto;
+    expect(detail.imageSourceUrl).toMatch(/^https:\/\/unsplash\.com\/photos\//);
+  });
+
   it('GET /products?category= with an unknown slug is a 404', async () => {
     await request(app.getHttpServer())
       .get('/products?category=not-a-category')

@@ -29,6 +29,7 @@ export class PrismaOrderRepository implements OrderRepository {
           create: order.lines.map((line) => ({
             productId: line.productId,
             titleSnapshot: line.titleSnapshot,
+            imageSnapshot: line.imageSnapshot,
             unitPriceCents: line.unitPrice.cents,
             quantity: line.quantity.value,
           })),

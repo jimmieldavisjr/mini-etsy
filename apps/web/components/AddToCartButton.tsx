@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { announceCartChange, api } from '@/lib/api';
 import { MAX_LINE_QUANTITY } from '@/lib/cart';
+import { BagIcon, CheckIcon, ErrorCircleIcon } from './icons';
+import { QuantityStepper } from './QuantityStepper';
 import ui from './ui.module.css';
 import styles from './AddToCartButton.module.css';
 
@@ -25,7 +27,7 @@ export function AddToCartButton({
 
   if (stock <= 0) {
     return (
-      <button type="button" className={ui.button} disabled>
+      <button type="button" className={`${ui.buttonAccent} ${ui.large} ${ui.block}`} disabled>
         Sold out
       </button>
     );
@@ -50,45 +52,43 @@ export function AddToCartButton({
   return (
     <div className={styles.wrap}>
       <div className={styles.row}>
-        <label className={styles.qty}>
-          <span className="visually-hidden">Quantity</span>
-          <select
-            className={ui.input}
-            value={quantity}
-            onChange={(e) => {
-              setQuantity(Number(e.target.value));
-              setState({ kind: 'idle' });
-            }}
-            disabled={state.kind === 'adding'}
-          >
-            {Array.from({ length: max }, (_, i) => i + 1).map((n) => (
-              <option key={n} value={n}>
-                {n}
-              </option>
-            ))}
-          </select>
-        </label>
+        <QuantityStepper
+          label="Quantity"
+          value={quantity}
+          max={max}
+          size="large"
+          disabled={state.kind === 'adding'}
+          onChange={(next) => {
+            setQuantity(next);
+            setState({ kind: 'idle' });
+          }}
+        />
         <button
           type="button"
-          className={`${ui.button} ${styles.button}`}
+          className={`${ui.buttonAccent} ${ui.large} ${styles.button}`}
           onClick={add}
           disabled={state.kind === 'adding'}
         >
+          {state.kind === 'added' ? <CheckIcon size={18} /> : <BagIcon size={18} />}
           {state.kind === 'adding'
             ? 'Adding…'
             : state.kind === 'added'
-              ? 'Added to cart ✓'
+              ? 'Added to cart'
               : 'Add to cart'}
         </button>
       </div>
       <div aria-live="polite">
         {state.kind === 'added' && (
           <p className={styles.message}>
-            <Link href="/cart">View cart and check out</Link>
+            In your cart.{' '}
+            <Link href="/cart" className={ui.textLink}>
+              View cart and check out
+            </Link>
           </p>
         )}
         {state.kind === 'error' && (
           <p className={ui.fieldError} role="alert">
+            <ErrorCircleIcon size={16} />
             {state.message}
           </p>
         )}

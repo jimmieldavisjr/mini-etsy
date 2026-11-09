@@ -19,23 +19,29 @@ model Category {
   id       String    @id @default(cuid())
   name     String
   slug     String    @unique
+  /// Base URL of a photo on Unsplash's CDN; the web app adds size parameters.
+  imageUrl String?
   products Product[]
 
   @@map("catalog_categories")
 }
 
 model Product {
-  id          String   @id @default(cuid())
-  title       String
-  slug        String   @unique
-  description String
-  priceCents  Int
-  stock       Int
-  shopName    String
-  active      Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  categoryId  String
-  category    Category @relation(fields: [categoryId], references: [id])
+  id             String   @id @default(cuid())
+  title          String
+  slug           String   @unique
+  description    String
+  priceCents     Int
+  stock          Int
+  shopName       String
+  active         Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  /// Base URL of a photo on Unsplash's CDN; the web app adds size parameters.
+  imageUrl       String?
+  /// The photo's page on Unsplash, used to credit the photographer.
+  imageSourceUrl String?
+  categoryId     String
+  category       Category @relation(fields: [categoryId], references: [id])
 
   @@index([categoryId])
   @@index([createdAt])
@@ -81,13 +87,14 @@ model Order {
 }
 
 model OrderLine {
-  id             Int    @id @default(autoincrement())
+  id             Int     @id @default(autoincrement())
   orderId        String
   productId      String
   titleSnapshot  String
+  imageSnapshot  String?
   unitPriceCents Int
   quantity       Int
-  order          Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  order          Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
 
   @@index([orderId])
   @@map("ordering_order_lines")

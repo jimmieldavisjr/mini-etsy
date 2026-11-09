@@ -28,6 +28,7 @@ export async function buildCartDto(
       slug: product?.slug ?? '',
       title: product?.title ?? 'Item no longer available',
       shopName: product?.shopName ?? '',
+      imageUrl: product?.imageUrl ?? null,
       unitPriceCents,
       quantity: quantity.value,
       lineTotalCents: available ? unitPriceCents * quantity.value : 0,

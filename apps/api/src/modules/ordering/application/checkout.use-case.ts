@@ -54,6 +54,7 @@ export class Checkout {
           lines.push({
             productId: product.id,
             titleSnapshot: product.title,
+            imageSnapshot: product.imageUrl,
             unitPriceCents: product.priceCents,
             quantity: item.quantity,
           });

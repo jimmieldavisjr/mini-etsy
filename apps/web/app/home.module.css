@@ -1,52 +1,326 @@
+/* Hero */
+
 .hero {
-  padding: 24px 0 8px;
-  text-align: center;
-}
-
-.hero h1 {
-  max-width: 22ch;
-  margin-inline: auto;
-}
-
-.tiles {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+  align-items: center;
+  gap: 56px;
+  padding: 56px 0 16px;
+}
+
+.heroText {
+  display: grid;
+  gap: 22px;
+  align-content: center;
+}
+
+.eyebrowDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brass);
+  box-shadow: 0 0 0 4px var(--brass-soft);
+}
+
+.heroTitle {
+  font-size: clamp(2.6rem, 1.6rem + 3.6vw, 4.6rem);
+  line-height: 1.02;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.heroTitle em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent-text);
+}
+
+.heroLead {
+  max-width: 46ch;
+  font-size: 1.08rem;
+  color: var(--text-2);
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
   gap: 12px;
+  margin-top: 6px;
+}
+
+.heroArt {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 14px;
+  height: 520px;
+}
+
+.heroMain {
+  grid-row: 1 / span 2;
+  border-radius: var(--r-xl);
+  box-shadow: var(--e3);
+}
+
+.heroSide {
+  border-radius: var(--r-xl);
+  box-shadow: var(--e2);
+}
+
+/* Acrylic card floating over the photos */
+.heroChip {
+  position: absolute;
+  left: -28px;
+  bottom: 32px;
+  display: grid;
+  gap: 2px;
+  padding: 16px 20px;
+  min-width: 230px;
+  border-radius: var(--r-lg);
+  text-decoration: none;
+  background: rgb(255 255 255 / 70%);
+  border: 1px solid rgb(255 255 255 / 60%);
+  box-shadow: var(--e4);
+  backdrop-filter: blur(24px) saturate(170%);
+  transition: transform var(--normal) var(--ease);
+}
+
+.heroChip:hover {
+  transform: translateY(-3px);
+}
+
+.heroChipLabel {
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.heroChipTitle {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.heroChipMeta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-2);
+}
+
+/* Collections */
+
+.collections {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: repeat(2, 230px);
+  gap: 16px;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.tile {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 2px;
-  min-height: 110px;
-  padding: 16px;
-  border-radius: var(--radius);
-  background: var(--accent-soft);
-  border: 1px solid #f3d6c4;
+.featured {
+  grid-row: 1 / span 2;
+}
+
+.collection {
+  position: relative;
+  display: block;
+  height: 100%;
+  border-radius: var(--r-xl);
+  overflow: hidden;
   text-decoration: none;
-  transition: background 150ms ease;
+  color: #fff;
+  box-shadow: var(--e2);
 }
 
-.tile:hover {
-  background: #f8dccb;
+.collectionPhoto {
+  height: 100%;
 }
 
-.tileName {
-  font-family: var(--font-display);
-  font-size: 1.15rem;
+.collection::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgb(15 22 20 / 72%) 100%);
+  pointer-events: none;
+}
+
+.collectionText {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 18px;
+  z-index: 1;
+  display: grid;
+  gap: 2px;
+}
+
+.collectionName {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
   font-weight: 600;
+  line-height: 1.1;
 }
 
-.tileCount {
-  color: var(--muted);
-  font-size: 0.85rem;
+.featured .collectionName {
+  font-size: 2.3rem;
 }
 
-.tilesSkeleton {
+.collectionCount {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: rgb(255 255 255 / 82%);
+}
+
+.collection:hover .collectionCount svg {
+  transform: translateX(3px);
+}
+
+.collectionCount svg {
+  transition: transform var(--normal) var(--ease);
+}
+
+.collectionsSkeleton {
   composes: skeleton from '../components/ui.module.css';
-  height: 110px;
+  height: 476px;
+}
+
+/* Editorial band */
+
+.editorial {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 56px;
+  padding: 20px;
+  border-radius: calc(var(--r-xl) + 8px);
+  background: var(--layer);
+  border: 1px solid var(--stroke);
+  box-shadow: var(--e2);
+}
+
+.editorialPhoto {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--r-xl);
+}
+
+.editorialText {
+  display: grid;
+  gap: 18px;
+  justify-items: start;
+  padding-right: 32px;
+}
+
+/* Promises */
+
+.promises {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.promise {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  padding: 24px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--stroke);
+  background: rgb(255 255 255 / 45%);
+}
+
+.promiseIcon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 6px;
+  border-radius: var(--r-md);
+  color: var(--accent-text);
+  background: var(--accent-soft);
+}
+
+.promise h3 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+}
+
+/* Responsive */
+
+@media (max-width: 960px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-top: 32px;
+  }
+
+  .heroArt {
+    height: 420px;
+  }
+
+  .heroChip {
+    left: 16px;
+    bottom: 16px;
+  }
+
+  .collections {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 280px repeat(2, 190px);
+  }
+
+  .featured {
+    grid-row: auto;
+    grid-column: 1 / -1;
+  }
+
+  .editorial {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .editorialText {
+    padding: 0 8px 12px;
+  }
+
+  .promises {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .heroArt {
+    height: 340px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  .heroSide {
+    display: none;
+  }
+
+  .heroMain {
+    grid-row: auto;
+  }
+
+  .collections {
+    grid-template-rows: 220px repeat(2, 160px);
+    gap: 12px;
+  }
+
+  .collectionName {
+    font-size: 1.3rem;
+  }
+
+  .featured .collectionName {
+    font-size: 1.8rem;
+  }
 }

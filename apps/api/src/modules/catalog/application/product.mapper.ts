@@ -15,6 +15,7 @@ export function toCategoryDto({
     name: category.name,
     slug: category.slug.value,
     productCount,
+    imageUrl: category.imageUrl,
   };
 }
 
@@ -27,6 +28,7 @@ export function toProductSummaryDto(product: Product): ProductSummaryDto {
     stock: product.stock,
     shopName: product.shopName,
     categorySlug: product.category.slug,
+    imageUrl: product.imageUrl,
   };
 }
 
@@ -35,5 +37,6 @@ export function toProductDetailDto(product: Product): ProductDetailDto {
     ...toProductSummaryDto(product),
     description: product.description,
     categoryName: product.category.name,
+    imageSourceUrl: product.imageSourceUrl,
   };
 }

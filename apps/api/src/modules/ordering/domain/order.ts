@@ -10,6 +10,7 @@ export class OrderLine {
   constructor(
     readonly productId: string,
     readonly titleSnapshot: string,
+    readonly imageSnapshot: string | null,
     readonly unitPrice: Money,
     readonly quantity: Quantity,
   ) {}
@@ -28,6 +29,7 @@ export interface ShippingDetails {
 export interface OrderLineProps {
   productId: string;
   titleSnapshot: string;
+  imageSnapshot: string | null;
   unitPriceCents: number;
   quantity: number;
 }
@@ -121,6 +123,7 @@ function toLine(props: OrderLineProps): OrderLine {
   return new OrderLine(
     props.productId,
     props.titleSnapshot,
+    props.imageSnapshot,
     Money.fromCents(props.unitPriceCents),
     Quantity.of(props.quantity),
   );

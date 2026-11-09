@@ -1,0 +1,78 @@
+.banner {
+  position: relative;
+  height: 300px;
+  border-radius: calc(var(--r-xl) + 4px);
+  overflow: hidden;
+  box-shadow: var(--e3);
+  color: #fff;
+}
+
+.bannerPhoto {
+  height: 100%;
+}
+
+.banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgb(14 24 21 / 78%) 0%, rgb(14 24 21 / 35%) 55%, transparent 100%);
+  pointer-events: none;
+}
+
+.bannerText {
+  position: absolute;
+  inset: auto 40px 36px;
+  z-index: 1;
+  display: grid;
+  gap: 8px;
+}
+
+.bannerText h1 {
+  font-size: clamp(2.4rem, 1.8rem + 2.4vw, 3.6rem);
+}
+
+.bannerText p {
+  color: rgb(255 255 255 / 82%);
+}
+
+.crumbs {
+  display: flex;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: rgb(255 255 255 / 70%);
+}
+
+.crumbs a {
+  color: rgb(255 255 255 / 85%);
+  text-decoration: none;
+}
+
+.crumbs a:hover {
+  text-decoration: underline;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 28px 0 28px;
+}
+
+.bannerSkeleton {
+  composes: skeleton from '../../../components/ui.module.css';
+  height: 300px;
+  margin-bottom: 92px;
+}
+
+@media (max-width: 640px) {
+  .banner {
+    height: 220px;
+  }
+
+  .bannerText {
+    inset: auto 20px 22px;
+  }
+}

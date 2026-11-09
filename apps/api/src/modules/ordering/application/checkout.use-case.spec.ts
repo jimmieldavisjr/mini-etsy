@@ -62,8 +62,8 @@ function setup(
   return { cart, catalog, orders, checkout };
 }
 
-const mug: PricedProduct = { id: 'mug', title: 'Speckled Mug', priceCents: 2800, stock: 5, active: true };
-const card: PricedProduct = { id: 'card', title: 'Fox Card', priceCents: 450, stock: 1, active: true };
+const mug: PricedProduct = { id: 'mug', title: 'Speckled Mug', imageUrl: 'https://images.example.com/mug', priceCents: 2800, stock: 5, active: true };
+const card: PricedProduct = { id: 'card', title: 'Fox Card', imageUrl: null, priceCents: 450, stock: 1, active: true };
 
 // ---------- Tests ----------
 
@@ -82,8 +82,8 @@ describe('Checkout', () => {
     expect(order.status).toBe('Pending');
     expect(order.totalCents).toBe(2 * 2800 + 450);
     expect(order.lines).toEqual([
-      { productId: 'mug', title: 'Speckled Mug', unitPriceCents: 2800, quantity: 2, lineTotalCents: 5600 },
-      { productId: 'card', title: 'Fox Card', unitPriceCents: 450, quantity: 1, lineTotalCents: 450 },
+      { productId: 'mug', title: 'Speckled Mug', imageUrl: 'https://images.example.com/mug', unitPriceCents: 2800, quantity: 2, lineTotalCents: 5600 },
+      { productId: 'card', title: 'Fox Card', imageUrl: null, unitPriceCents: 450, quantity: 1, lineTotalCents: 450 },
     ]);
     expect(orders.saved.has(order.id)).toBe(true);
     expect(catalog.products.find((p) => p.id === 'mug')?.stock).toBe(3);

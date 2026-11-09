@@ -2,6 +2,7 @@
 export interface PricedProduct {
   id: string;
   title: string;
+  imageUrl: string | null;
   priceCents: number;
   stock: number;
   active: boolean;

@@ -1,28 +1,67 @@
 .link {
-  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  min-height: 44px;
-  padding: 0 8px;
+  gap: 14px;
+  height: 40px;
+  padding: 0 12px 0 10px;
+  border-radius: var(--r-md);
   text-decoration: none;
+  font-size: 0.9rem;
   font-weight: 600;
   white-space: nowrap;
+  transition: background var(--fast) var(--ease);
 }
 
-.badge {
-  display: inline-grid;
+.link:hover {
+  background: var(--subtle-hover);
+}
+
+.link:active {
+  background: var(--subtle-pressed);
+}
+
+.icon {
+  position: relative;
+  display: grid;
   place-items: center;
-  min-width: 22px;
-  height: 22px;
-  padding: 0 6px;
-  border-radius: 999px;
-  background: var(--accent);
-  color: #fff;
-  font-size: 0.8rem;
 }
 
-@media (max-width: 560px) {
+/* Fluent InfoBadge */
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -9px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 2px solid var(--mica);
+  background: var(--accent);
+  color: var(--text-on-accent);
+  font-size: 0.66rem;
+  font-weight: 700;
+  line-height: 1;
+  animation: pop var(--normal) var(--ease);
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.4);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 760px) {
+  .link {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 420px) {
   .text {
     display: none;
   }

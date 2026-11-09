@@ -6,7 +6,8 @@ handmade items by category, search by title, add items to a cart and check out
 into an order.
 
 All shops, products and people in the seed data are made up. There are no real
-payments.
+payments. Product photos are real, linked from [Unsplash](https://unsplash.com)
+(see [Photography](#photography)).
 
 | Part | Stack |
 | --- | --- |
@@ -154,6 +155,31 @@ cart cookie belongs to the web app's own origin.
 Pages render a static shell and stream API data inside `<Suspense>`, the
 pattern Cache Components expects. The cart and checkout pages are client
 components.
+
+#### Design
+
+The look borrows Windows 11's Fluent foundations and adds an editorial,
+high-end layer on top:
+
+- **Surfaces:** a warm Mica-like backdrop, translucent cards with soft
+  elevation, and an acrylic (blurred) header, all with 8–18px rounded corners.
+- **Controls:** Fluent-style accent, standard and subtle buttons, text fields
+  with a darker bottom edge and an accent underline on focus, a NumberBox-style
+  quantity stepper, and a segmented sort bar.
+- **Type:** Segoe UI Variable (with Inter as the fallback off Windows) for the
+  interface, and Cormorant Garamond for the logo, headings and prices.
+- **Color:** deep spruce (`--accent`) with a brass detail (`--brass`). All
+  tokens live at the top of `apps/web/app/globals.css`.
+
+#### Photography
+
+Product, collection and home-page photos are free-licence images from
+[Unsplash](https://unsplash.com/license), **linked rather than copied**, so
+the site needs an internet connection to show them. The seed stores each
+photo's CDN URL (`imageUrl`) and its Unsplash page (`imageSourceUrl`), which
+the product page links to as the credit. `apps/web/lib/image-loader.ts` tells
+`next/image` to request each size straight from Unsplash's CDN. Orders keep a
+snapshot of each line's photo, just as they keep the title and price.
 
 ## Tests
 

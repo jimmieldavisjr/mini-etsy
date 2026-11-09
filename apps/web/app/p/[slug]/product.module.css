@@ -1,54 +1,119 @@
 .layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  gap: 40px;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 48px;
   align-items: start;
 }
 
-.info {
+.gallery {
   display: grid;
-  gap: 8px;
-}
-
-.info h1 {
+  gap: 10px;
   margin: 0;
 }
 
-.shop {
-  margin: 8px 0 0;
-  color: var(--muted);
-  font-weight: 600;
+.gallery a {
+  color: var(--text-2);
+}
+
+.photo {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--r-xl);
+  box-shadow: var(--e3);
+}
+
+/* The buy panel: an elevated Fluent layer that stays in view. */
+.panel {
+  position: sticky;
+  top: 140px;
+  display: grid;
+  gap: 18px;
+  padding: 32px;
+  border-radius: var(--r-xl);
+  background: var(--layer);
+  border: 1px solid var(--stroke);
+  box-shadow: var(--e3);
+  backdrop-filter: blur(24px) saturate(150%);
+}
+
+.title {
+  font-size: clamp(2rem, 1.5rem + 1.6vw, 2.8rem);
+  line-height: 1.05;
+}
+
+.priceRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
 .price {
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 600;
+  font-variant-numeric: lining-nums;
 }
 
-.stock {
-  margin: 0 0 8px;
-  color: var(--muted);
+.features {
+  display: grid;
+  gap: 12px;
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  font-size: 0.9rem;
+  color: var(--text-2);
+}
+
+.features li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.features svg {
+  flex: none;
+  color: var(--accent-text);
+}
+
+.features strong {
+  color: var(--text);
+  font-weight: 600;
 }
 
 .descHeading {
-  font-size: 1.1rem;
-  margin: 24px 0 0;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
 }
 
 .description {
-  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
   white-space: pre-line;
 }
 
-.skeleton {
+.skeletonPhoto {
   composes: skeleton from '../../../components/ui.module.css';
-  height: 420px;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--r-xl);
 }
 
-@media (max-width: 760px) {
+.skeletonPanel {
+  composes: skeleton from '../../../components/ui.module.css';
+  height: 520px;
+  border-radius: var(--r-xl);
+}
+
+@media (max-width: 900px) {
   .layout {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+
+  .panel {
+    position: static;
+    padding: 24px;
   }
 }

@@ -1,0 +1,72 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text);
+  flex: none;
+}
+
+.mark {
+  flex: none;
+  border-radius: 10px;
+  box-shadow:
+    0 1px 2px rgb(23 48 41 / 30%),
+    0 4px 12px rgb(23 48 41 / 18%);
+}
+
+.wordmark {
+  display: grid;
+  line-height: 1;
+}
+
+.name {
+  display: inline-flex;
+  align-items: baseline;
+  font-family: var(--font-serif);
+  font-size: 1.62rem;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+}
+
+.name em {
+  font-style: italic;
+  font-weight: 500;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  margin: 0 4px 0 3px;
+  border-radius: 50%;
+  background: var(--brass);
+  transform: translateY(-5px);
+}
+
+.tagline {
+  margin-top: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.56rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.light {
+  color: var(--text-on-accent);
+}
+
+.light .tagline {
+  color: rgb(251 250 247 / 60%);
+}
+
+@media (max-width: 640px) {
+  .tagline {
+    display: none;
+  }
+
+  .name {
+    font-size: 1.4rem;
+  }
+}

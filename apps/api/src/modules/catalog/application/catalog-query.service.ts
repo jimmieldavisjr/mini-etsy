@@ -10,6 +10,7 @@ export interface ProductSnapshot {
   slug: string;
   title: string;
   shopName: string;
+  imageUrl: string | null;
   priceCents: number;
   stock: number;
   active: boolean;
@@ -35,6 +36,7 @@ export class CatalogQueryService {
       slug: p.slug.value,
       title: p.title,
       shopName: p.shopName,
+      imageUrl: p.imageUrl,
       priceCents: p.price.cents,
       stock: p.stock,
       active: p.active,

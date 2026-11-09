@@ -7,12 +7,23 @@ export class Category extends Entity {
     id: string,
     readonly name: string,
     readonly slug: Slug,
+    readonly imageUrl: string | null,
   ) {
     super(id);
   }
 
-  static restore(props: { id: string; name: string; slug: string }): Category {
-    return new Category(props.id, props.name, Slug.of(props.slug));
+  static restore(props: {
+    id: string;
+    name: string;
+    slug: string;
+    imageUrl: string | null;
+  }): Category {
+    return new Category(
+      props.id,
+      props.name,
+      Slug.of(props.slug),
+      props.imageUrl,
+    );
   }
 }
 

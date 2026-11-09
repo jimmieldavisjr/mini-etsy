@@ -1,91 +1,223 @@
-/* Small shared building blocks: page wrapper, buttons, fields, notices. */
+/* Shared building blocks: layout, layers, buttons, fields and notices. */
 
 .container {
   width: 100%;
-  max-width: 1120px;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 24px;
 }
 
 .page {
-  padding: 32px 0 64px;
-}
-
-.breadcrumb {
-  color: var(--muted);
-  font-size: 0.9rem;
-  margin-bottom: 8px;
-}
-
-.lead {
-  color: var(--muted);
-  margin: 0 0 24px;
+  padding: 32px 0 80px;
 }
 
 .section {
-  margin-top: 40px;
+  margin-top: 72px;
 }
 
 .sectionHeader {
   display: flex;
-  align-items: baseline;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
-.sectionHeader h2 {
-  margin: 0;
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brass);
 }
+
+.lead {
+  color: var(--text-2);
+  font-size: 1.05rem;
+  max-width: 60ch;
+}
+
+.muted {
+  color: var(--text-2);
+}
+
+.small {
+  font-size: 0.85rem;
+  color: var(--text-3);
+}
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-3);
+  margin-bottom: 20px;
+}
+
+.breadcrumb a {
+  color: var(--text-2);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--text);
+  text-decoration: underline;
+}
+
+/* Layers: translucent cards over the Mica backdrop */
+
+.card {
+  background: var(--layer);
+  border: 1px solid var(--stroke);
+  border-radius: var(--r-lg);
+  box-shadow: var(--e2);
+  backdrop-filter: blur(20px) saturate(140%);
+}
+
+.cardPadded {
+  composes: card;
+  padding: 28px;
+}
+
+.divider {
+  height: 1px;
+  border: 0;
+  background: var(--divider);
+  margin: 20px 0;
+}
+
+/* Buttons (Fluent: accent, standard, subtle) */
 
 .button {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 44px;
-  padding: 0 20px;
-  border: 1px solid var(--accent);
-  border-radius: 999px;
-  background: var(--accent);
-  color: #fff;
+  min-height: 40px;
+  padding: 0 18px;
+  border-radius: var(--r-md);
+  font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none;
+  white-space: nowrap;
   cursor: pointer;
-  transition: background 120ms ease;
+  user-select: none;
+  transition:
+    background var(--fast) var(--ease),
+    box-shadow var(--fast) var(--ease),
+    transform var(--fast) var(--ease),
+    color var(--fast) var(--ease);
 }
 
-.button:hover:not(:disabled) {
-  background: var(--accent-strong);
+.button:active:not(:disabled) {
+  transform: scale(0.98);
 }
 
 .button:disabled {
-  opacity: 0.55;
   cursor: not-allowed;
 }
 
-.buttonGhost {
+.buttonAccent {
   composes: button;
+  color: var(--text-on-accent);
+  background: var(--accent);
+  border: 1px solid rgb(255 255 255 / 8%);
+  box-shadow:
+    inset 0 -1px 0 rgb(0 0 0 / 28%),
+    var(--e1);
+}
+
+.buttonAccent:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.buttonAccent:active:not(:disabled) {
+  background: var(--accent-pressed);
+  color: rgb(251 250 247 / 80%);
+}
+
+.buttonAccent:disabled {
+  background: rgb(28 27 26 / 22%);
+  box-shadow: none;
+  color: rgb(255 255 255 / 90%);
+}
+
+.buttonStandard {
+  composes: button;
+  color: var(--text);
+  background: var(--layer-strong);
+  border: 1px solid var(--stroke-control);
+  border-bottom-color: var(--stroke-control-bottom);
+  box-shadow: var(--e1);
+}
+
+.buttonStandard:hover:not(:disabled) {
+  background: var(--layer-hover);
+}
+
+.buttonStandard:active:not(:disabled) {
+  background: rgb(250 249 247 / 90%);
+  color: var(--text-2);
+  border-bottom-color: var(--stroke-control);
+}
+
+.buttonStandard:disabled {
+  color: var(--text-3);
+}
+
+.buttonSubtle {
+  composes: button;
+  color: var(--text);
   background: transparent;
-  color: var(--accent);
+  border: 1px solid transparent;
 }
 
-.buttonGhost:hover:not(:disabled) {
-  background: var(--accent-soft);
+.buttonSubtle:hover:not(:disabled) {
+  background: var(--subtle-hover);
 }
 
-.linkButton {
-  border: 0;
-  background: none;
+.buttonSubtle:active:not(:disabled) {
+  background: var(--subtle-pressed);
+}
+
+.buttonSubtle:disabled {
+  color: var(--text-3);
+}
+
+.large {
+  min-height: 48px;
+  padding: 0 24px;
+  font-size: 0.95rem;
+}
+
+.block {
+  width: 100%;
+}
+
+.iconButton {
+  composes: buttonSubtle;
+  min-height: 36px;
+  width: 36px;
   padding: 0;
-  color: var(--muted);
-  text-decoration: underline;
-  cursor: pointer;
 }
 
-.linkButton:hover {
-  color: var(--danger);
+.textLink {
+  color: var(--accent-text);
+  font-weight: 600;
+  text-decoration: none;
 }
+
+.textLink:hover {
+  text-decoration: underline;
+}
+
+/* Fields (Fluent: darker bottom edge, accent underline on focus) */
 
 .field {
   display: grid;
@@ -93,71 +225,176 @@
 }
 
 .label {
+  font-size: 0.85rem;
   font-weight: 600;
-  font-size: 0.95rem;
 }
 
 .input {
   width: 100%;
-  min-height: 44px;
-  padding: 10px 12px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--surface);
+  min-height: 40px;
+  padding: 9px 12px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--stroke-control);
+  border-bottom-color: var(--stroke-control-bottom);
+  background: var(--layer-strong);
+  transition:
+    background var(--fast) var(--ease),
+    box-shadow var(--fast) var(--ease);
+}
+
+.input::placeholder {
+  color: var(--text-3);
+}
+
+.input:hover {
+  background: var(--layer-hover);
+}
+
+.input:focus {
+  outline: none;
+  background: #fff;
+  border-bottom-color: var(--accent);
+  box-shadow: inset 0 -1px 0 var(--accent);
 }
 
 .input[aria-invalid='true'] {
-  border-color: var(--danger);
+  border-bottom-color: var(--danger);
+  box-shadow: inset 0 -1px 0 var(--danger);
+}
+
+textarea.input {
+  resize: vertical;
+  min-height: 96px;
 }
 
 .fieldError {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   color: var(--danger);
+  font-size: 0.82rem;
+}
+
+/* InfoBars */
+
+.infoBar {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--stroke);
+  background: var(--layer-strong);
   font-size: 0.9rem;
-  margin: 0;
 }
 
-.notice {
-  padding: 12px 16px;
-  border-radius: 8px;
-  background: var(--accent-soft);
-  margin: 0 0 16px;
+.infoBar svg {
+  flex: none;
+  margin-top: 1px;
 }
 
-.error {
-  composes: notice;
-  background: #fdecea;
-  color: var(--danger);
+.infoSuccess {
+  composes: infoBar;
+  background: var(--success-soft);
+  border-color: rgb(29 122 76 / 18%);
 }
 
-.success {
-  composes: notice;
-  background: #e8f4ec;
+.infoSuccess svg {
   color: var(--success);
 }
 
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
+.infoError {
+  composes: infoBar;
+  background: var(--danger-soft);
+  border-color: rgb(180 35 24 / 18%);
 }
 
-.muted {
-  color: var(--muted);
+.infoError svg {
+  color: var(--danger);
 }
+
+/* Pills */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: var(--subtle-hover);
+  color: var(--text-2);
+}
+
+.pill::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.pillSuccess {
+  composes: pill;
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.pillCaution {
+  composes: pill;
+  background: var(--caution-soft);
+  color: var(--caution);
+}
+
+.pillNeutral {
+  composes: pill;
+}
+
+.pillAccent {
+  composes: pill;
+  background: var(--accent-soft);
+  color: var(--accent-text);
+}
+
+/* Loading */
 
 .skeleton {
-  border-radius: var(--radius);
-  background: linear-gradient(90deg, #efe8df 0%, #f7f2ec 50%, #efe8df 100%);
+  border-radius: var(--r-lg);
+  background: linear-gradient(
+    100deg,
+    rgb(28 27 26 / 5%) 20%,
+    rgb(28 27 26 / 9%) 40%,
+    rgb(28 27 26 / 5%) 60%
+  );
   background-size: 200% 100%;
-  animation: shimmer 1.2s ease-in-out infinite;
+  animation: shimmer 1.4s ease-in-out infinite;
 }
 
 @keyframes shimmer {
   from {
-    background-position: 100% 0;
+    background-position: 120% 0;
   }
   to {
-    background-position: -100% 0;
+    background-position: -80% 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .page {
+    padding: 20px 0 56px;
+  }
+
+  .section {
+    margin-top: 48px;
+  }
+
+  .cardPadded {
+    padding: 20px;
   }
 }

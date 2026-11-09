@@ -1,37 +1,70 @@
+/* Fluent AutoSuggestBox: soft fill, darker bottom edge, accent on focus. */
 .form {
+  position: relative;
   flex: 1;
   display: flex;
-  min-width: 0;
-  max-width: 560px;
+  max-width: 520px;
   margin: 0 auto;
-  border: 2px solid var(--text);
-  border-radius: 999px;
-  background: var(--surface);
-  overflow: hidden;
-}
-
-.form:focus-within {
-  border-color: var(--accent);
 }
 
 .input {
-  flex: 1;
-  min-width: 0;
-  border: 0;
-  padding: 8px 16px;
-  background: transparent;
+  width: 100%;
+  height: 40px;
+  padding: 0 44px 0 16px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--stroke-control);
+  border-bottom-color: var(--stroke-control-bottom);
+  background: var(--layer-strong);
+  transition:
+    background var(--fast) var(--ease),
+    box-shadow var(--fast) var(--ease);
+}
+
+.input::placeholder {
+  color: var(--text-3);
+}
+
+.input:hover {
+  background: var(--layer-hover);
 }
 
 .input:focus {
   outline: none;
+  background: #fff;
+  border-bottom-color: var(--accent);
+  box-shadow:
+    inset 0 -1px 0 var(--accent),
+    var(--e2);
+}
+
+.input::-webkit-search-cancel-button {
+  display: none;
 }
 
 .button {
+  position: absolute;
+  top: 4px;
+  right: 4px;
   display: grid;
   place-items: center;
-  width: 44px;
+  width: 32px;
+  height: 32px;
   border: 0;
-  background: var(--accent);
-  color: #fff;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--text-2);
   cursor: pointer;
+}
+
+.button:hover {
+  background: var(--subtle-hover);
+  color: var(--text);
+}
+
+@media (max-width: 760px) {
+  .form {
+    order: 3;
+    flex-basis: 100%;
+    max-width: none;
+  }
 }

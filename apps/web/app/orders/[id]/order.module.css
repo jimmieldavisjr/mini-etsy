@@ -1,63 +1,173 @@
+.wrap {
+  display: grid;
+  gap: 24px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 8px;
+}
+
+.orderId {
+  margin: 4px 0;
+  font-variant-numeric: lining-nums;
+  letter-spacing: 0.01em;
+}
+
+/* Progress: dots joined by a line, filled up to the current step. */
 .steps {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
   list-style: none;
-  margin: 0 0 24px;
+  margin: 0;
   padding: 0;
 }
 
 .step,
 .stepDone {
-  padding: 10px 8px;
-  border-radius: 8px;
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
   text-align: center;
-  font-weight: 600;
-  font-size: 0.9rem;
-  border: 1px solid var(--border);
-  color: var(--muted);
-  background: var(--surface);
 }
 
-.stepDone {
+.step::before,
+.stepDone::before {
+  content: '';
+  position: absolute;
+  top: 13px;
+  left: -50%;
+  width: 100%;
+  height: 2px;
+  background: var(--stroke-strong);
+  z-index: 0;
+}
+
+.stepDone::before {
+  background: var(--accent);
+}
+
+.steps li:first-child::before {
+  display: none;
+}
+
+.stepDot {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--layer-solid);
+  border: 2px solid var(--stroke-strong);
+  color: var(--text-on-accent);
+}
+
+.stepDone .stepDot {
+  background: var(--accent);
   border-color: var(--accent);
-  background: var(--accent-soft);
-  color: var(--accent-strong);
+}
+
+.step[aria-current='step'] .stepDot,
+.stepDone[aria-current='step'] .stepDot {
+  box-shadow: 0 0 0 5px var(--accent-soft);
+}
+
+.stepName {
+  margin-top: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.step .stepName {
+  color: var(--text-3);
+}
+
+.stepHint {
+  font-size: 0.78rem;
+  color: var(--text-3);
 }
 
 .columns {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-  gap: 20px;
-  margin-bottom: 24px;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
 }
 
-.table {
-  width: 100%;
-  border-collapse: collapse;
+.cardHeading {
+  margin-bottom: 16px;
+  font-size: 1.5rem;
 }
 
-.table th,
-.table td {
-  padding: 8px 4px;
-  border-bottom: 1px solid var(--border);
-  text-align: left;
+.lines {
+  display: grid;
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.table tfoot th,
-.table tfoot td {
-  border-bottom: 0;
-  font-weight: 700;
+.lines li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-.num {
-  text-align: right !important;
+.thumb {
+  flex: none;
+  width: 72px;
+  height: 72px;
+  border-radius: var(--r-md);
+}
+
+.lineText {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.lineTitle {
+  font-weight: 500;
+}
+
+.lineTotal {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
   white-space: nowrap;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--divider);
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  font-weight: 600;
+  font-variant-numeric: lining-nums;
 }
 
 .address {
   white-space: pre-line;
-  margin: 0 0 8px;
+  margin-bottom: 8px;
+}
+
+.skeleton {
+  composes: skeleton from '../../../components/ui.module.css';
+  height: 520px;
+  max-width: 1040px;
+  margin: 0 auto;
 }
 
 @media (max-width: 760px) {
@@ -65,7 +175,11 @@
     grid-template-columns: 1fr;
   }
 
-  .steps {
-    grid-template-columns: repeat(2, 1fr);
+  .stepHint {
+    display: none;
+  }
+
+  .stepName {
+    font-size: 0.78rem;
   }
 }

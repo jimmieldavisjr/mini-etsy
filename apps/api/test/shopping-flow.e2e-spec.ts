@@ -99,6 +99,8 @@ describe('Cart and Ordering (e2e)', () => {
     expect(order.lines.map((l) => l.title).sort()).toEqual(
       [candle.title, mug.title].sort(),
     );
+    // Lines keep a snapshot of the photo, like the title and price.
+    expect(order.lines.find((l) => l.productId === mug.id)?.imageUrl).toBe(mug.imageUrl);
 
     // Stock went down, and the cart is empty.
     expect((await product('speckled-stoneware-mug')).stock).toBe(mug.stock - 2);
